@@ -12,22 +12,7 @@ async function setup() {
 let num = 0; 
 function draw() {
   
-  if (num === 0){// morning 
-    background(135,206,235);
-    fill(145,142,133);
-    quad(0, height - 100, width, height - 100, width, height, 0, height);
-    fill(255,234,0);
-    circle(width - 50, 50,100);
-  }
-  
-  else if (num === 1){// Evening
-    background(41,43,49);
-  }
-  else if (num === 2){//Afternoon
-    background(246,206,138);
-  }
-  fill(255,255,255);
-  aeroplane();
+  backgroundSetter();
   
   
   
@@ -52,5 +37,42 @@ function aeroplane(){
   quad(mouseX - 50, mouseY - 15, mouseX - 80, mouseY - 15,  mouseX - 80, mouseY - 10,  mouseX - 50, mouseY + 15)
   quad(mouseX - 65, mouseY - 15, mouseX - 65, mouseY - 50, mouseX - 60, mouseY - 50, mouseX - 40, mouseY - 15 )
   rect(mouseX - 50,mouseY - 15,100,30);
+  
+}
+function backgroundSetter(){
+  switch (num){
+    case 0:
+      morning();
+      break;
+    case 1:
+      background(41,43,49);
+      break;
+    case 2:
+      background(246,206,138);
+      break;
+
+  }
+
+  fill(255,255,255);
+  aeroplane();
+}
+function morning(){
+  background(135,206,235);
+  fill(145,142,133);
+  quad(0, height - 100, width, height - 100, width, height, 0, height);
+  fill(255,234,0);
+  circle(width - 50, 50,100);
+  let x = 0;
+  let space = floor(width/10);
+  fill(0, 154, 23);
+  rect(0, height - 90, width, 50 );
+  fill(255, 255, 255);
+  for (let i = 0; i < 10; i++){
+    stroke();
+    rect(x , height - 300, 60, 200);
+    rect(x * 2, height - 600,60,400 );
+    x = x  + space;
+  }
+  
   
 }
