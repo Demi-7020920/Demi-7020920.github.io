@@ -32,7 +32,7 @@ function keyPressed(){
   }
 }
 function aeroplane(){
-  noStroke()
+  noStroke();
   ellipse(mouseX + 50, mouseY,80,30)
   quad(mouseX - 50, mouseY - 15, mouseX - 80, mouseY - 15,  mouseX - 80, mouseY - 10,  mouseX - 50, mouseY + 15)
   quad(mouseX - 65, mouseY - 15, mouseX - 65, mouseY - 50, mouseX - 60, mouseY - 50, mouseX - 40, mouseY - 15 )
@@ -54,7 +54,9 @@ function backgroundSetter(){
   }
 
   fill(255,255,255);
+  
   aeroplane();
+  
 }
 function morning(){
   background(135,206,235);
@@ -68,11 +70,13 @@ function morning(){
   rect(0, height - 90, width, 50 );
   fill(255, 255, 255);
   for (let i = 0; i < 10; i++){
-    stroke();
+    stroke(100);
+    rect(x + 20, height - 500,60,400 );
     rect(x , height - 300, 60, 200);
-    rect(x * 2, height - 600,60,400 );
+    
     x = x  + space;
   }
+  
   
   
 }
