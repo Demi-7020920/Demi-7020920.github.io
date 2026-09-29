@@ -27,7 +27,16 @@ function mousePressed(){
   }
 }
 function keyPressed(){
-  
+
+  if (key === 'f'){
+    let x = (width - 50) / 4
+    let space = 25
+    for (let i = 0; i < 5; i++){
+      circle(space, 25, 50);
+      space = space + x;
+    }
+    
+  }
   
 }
 function aeroplane(){
@@ -89,7 +98,7 @@ function cityscape(){
     }
 
     else if (currentBack === 1){
-      fill(255,255,255);
+      fill(192,192,192);
     }
     else{
       fill(145,142,133);
