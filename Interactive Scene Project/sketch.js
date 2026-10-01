@@ -10,12 +10,20 @@ async function setup() {
   createCanvas(windowWidth, windowHeight);
 }
 let currentBack = 0; 
-
+let sky = 0;
 function draw() {
   
   backgroundSetter();
   fill(255,255,255);
   text('DEMI',width - 40,height - 20)
+  if (sky === 1){
+    for(let x  = 0; x < (width - 100); x += 50){
+      circle( 30 + x,40,50);
+      circle( 50 + x,40,45);
+      circle( 70 + x,40,50);
+    }
+    
+  }
 }
 function mousePressed(){
   if (mouseButton.center){
@@ -27,18 +35,24 @@ function mousePressed(){
   }
 }
 function keyPressed(){
-
-  if (key === 'f'){
-    let x = (width - 50) / 4
-    let space = 25
-    for (let i = 0; i < 5; i++){
-      circle(space, 25, 50);
-      space = space + x;
+  if (key === 'c'){
+    if (sky === 0){
+      sky = 1;
+    }
+    else if (sky === 1){
+      sky = 0;
     }
     
+    print("pressed" + sky);
   }
-  
+
+    
 }
+function clouds(){
+  circle(70,40,30);
+}
+  
+
 function aeroplane(){
   fill(255,255,255);
   noStroke();
