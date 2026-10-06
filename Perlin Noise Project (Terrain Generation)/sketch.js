@@ -88,8 +88,8 @@ function average(){
   //Collects total height of mountains and divides by amount of mountains generated
   averageHeight = averageHeight / numMount;
   let averageY = height - averageHeight;
-  fill(255,0,0, 120);
+  fill(255,0,0, 150);
   noStroke();
-  rect(0,averageY, width,11);
+  rect(0,averageY, width,5);
   //print("Average Height: " + floor(averageHeight)); - USed this to confirm avg Height
 }
