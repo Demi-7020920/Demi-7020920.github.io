@@ -16,9 +16,9 @@ async function setup() {
   spot = width*0.3;
   myBook = new Book("The Godfather","Mr. Scott",
     1234567891011,"leatherbound", 500, spot);
-  spot = spot + this.pages/10;
+  spot = spot + spot;
   book2 = new Book("Pride and Prejudice","William Shakespeare",5467283940573,"softcover",600,spot);
-  spot += this.pages/10;
+  spot += spot;
   book3 = new Book("Hanzel and Gretel","Superman",3049536274859,"hardcover",800,spot);
 }
 
