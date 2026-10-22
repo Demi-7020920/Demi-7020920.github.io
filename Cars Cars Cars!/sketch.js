@@ -13,16 +13,28 @@ async function setup() {
   //test2 = new Vehicle(1,(255,0,0),0,height/2 + 50,1,5);
 
   for(let i = 0; i < 20; i++ ){
-    eastbound.push(new Vehicle(floor(random(0,1)), 
-      color(random(255),random(255), random(255)),
-      0,floor(floor(random(height/2 + 25, height/2 + 225)))));
+    eastbound.push(new Vehicle(
+      0, 
+      fill(255),
+      0,
+      floor(random(height/2 + 25, height/2 + 225)),
+      1, 3));
+    westbound.push(new Vehicle(
+      1, 
+      fill(255),
+      width,
+      floor(random(height/2 - 40, height/2 - 225)),
+      0, 3));
   }
 }
 
 function draw() {
   background(220);
   drawRoad();
-  for(car of eastbound){
+  for(let car of eastbound){
+    car.action();
+  }
+  for(let car of westbound){
     car.action();
   }
   //test.action();
