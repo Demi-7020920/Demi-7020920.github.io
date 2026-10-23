@@ -12,20 +12,6 @@ async function setup() {
   //test = new Vehicle(0,(255,0,0),width - 200,250 + 50,0,5);
   //test2 = new Vehicle(1,(255,0,0),0,height/2 + 50,1,5);
 
-  for(let i = 0; i < 20; i++ ){
-    eastbound.push(new Vehicle(
-      0, 
-      fill(255),
-      0,
-      floor(random(height/2 + 25, height/2 + 225)),
-      1, 3));
-    westbound.push(new Vehicle(
-      1, 
-      fill(255),
-      width,
-      floor(random(height/2 - 40, height/2 - 225)),
-      0, 3));
-  }
 }
 
 function draw() {
@@ -39,6 +25,32 @@ function draw() {
   }
   //test.action();
   //test2.action();
+}
+
+function mousePressed(event){
+  if(mouseButton.left){
+    if(event.shiftKey){
+      westbound.push(new Vehicle(
+      random([0,1]), 
+      (255),
+      width,
+      floor(random(height/2 - 40, height/2 - 225)),
+      0, 3));
+    }
+    else{
+      eastbound.push(new Vehicle(
+      random([0,1]), 
+      (255),
+      0,
+      floor(random(height/2 + 25, height/2 + 210)),
+      1, 3));
+    }
+
+  }
+
+   
+  
+
 }
 
 function drawRoad(){
