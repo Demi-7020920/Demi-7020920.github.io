@@ -11,7 +11,7 @@ async function setup() {
   createCanvas(windowWidth, windowHeight);
   //test = new Vehicle(0,(255,0,0),width - 200,250 + 50,0,5);
   //test2 = new Vehicle(1,(255,0,0),0,height/2 + 50,1,5);
-
+  // test = new TrafficLight;
 }
 
 function draw() {
@@ -23,16 +23,17 @@ function draw() {
   for(let car of westbound){
     car.action();
   }
+  // test.action();
   //test.action();
   //test2.action();
 }
 
-function mousePressed(event){
+function mousePressed(){
   if(mouseButton.left){
-    if(event.shiftKey){
+    if(keyIsDown(SHIFT)){
       westbound.push(new Vehicle(
       random([0,1]), 
-      (255),
+      color(random(255),random(255),random(255)),
       width,
       floor(random(height/2 - 40, height/2 - 225)),
       0, 3));
@@ -40,7 +41,7 @@ function mousePressed(event){
     else{
       eastbound.push(new Vehicle(
       random([0,1]), 
-      (255),
+      color(random(255),random(255),random(255)),
       0,
       floor(random(height/2 + 25, height/2 + 210)),
       1, 3));
@@ -168,20 +169,36 @@ class Vehicle{
 
   action(){
     this.move();
-    chance = floor(random(1,100));
+    chance = round(random(1,100));
     if(chance === 1){
       this.speedUp();
     }
-    chance = floor(random(1,100));
+    chance = round(random(1,100));
     if(chance === 1){
       this.speedDown();
     }
-    chance = floor(random(1,100));
+    chance = round(random(1,100));
     if(chance === 1){
       this.changeColor();
     }
     this.display();
   }
 }
+
+// class TrafficLight{
+//   display(){
+//     circle(50,50,100);
+//   }
+//   action(){
+//     if(keyPressed(SPACE)){
+//       this.color(255,0,0);
+//       this.display();
+//     }
+//     else{
+//       this.color(0,255,0);
+//       this.display();
+//     }
+//   }
+// }
 
 
