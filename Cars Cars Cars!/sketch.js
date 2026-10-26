@@ -5,16 +5,18 @@
 //GLOBAL VARIABLES
 let eastbound = [];
 let westbound = [];
-let test; let chance;let test2;
+let test; let chance;let test2; 
+let StTime = 0;let redLight = false;
 
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   //test = new Vehicle(0,(255,0,0),width - 200,250 + 50,0,5);
   //test2 = new Vehicle(1,(255,0,0),0,height/2 + 50,1,5);
-  // test = new TrafficLight;
+  test = new TrafficLight(100,100,1);
 }
 
 function draw() {
+  //Draws the Vehicles and Traffic Light each Frame
   background(220);
   drawRoad();
   for(let car of eastbound){
@@ -23,35 +25,40 @@ function draw() {
   for(let car of westbound){
     car.action();
   }
-  // test.action();
-  //test.action();
-  //test2.action();
+  test.action();
+  if (redLight){
+    StTime = StTime + 1;
+  }
 }
 
 function mousePressed(){
+  //Adds new vehicles to their respective arays based on mouse input
   if(mouseButton.left){
     if(keyIsDown(SHIFT)){
       westbound.push(new Vehicle(
-      random([0,1]), 
-      color(random(255),random(255),random(255)),
-      width,
-      floor(random(height/2 - 40, height/2 - 225)),
-      0, 3));
+        random([0,1]), 
+        color(random(255),random(255),random(255)),
+        width,
+        floor(random(height/2 - 40, height/2 - 225)),
+        0, 4));
     }
     else{
       eastbound.push(new Vehicle(
-      random([0,1]), 
-      color(random(255),random(255),random(255)),
-      0,
-      floor(random(height/2 + 25, height/2 + 210)),
-      1, 3));
+        random([0,1]), 
+        color(random(255),random(255),random(255)),
+        0,
+        floor(random(height/2 + 25, height/2 + 210)),
+        1, 4));
     }
-
   }
+}
 
-   
-  
-
+function keyPressed(){
+  // Determines the red light based on input
+  if(key === ' '){
+    redLight = true;
+    console.log("Space Pressed");
+  }
 }
 
 function drawRoad(){
@@ -123,18 +130,20 @@ class Vehicle{
     }
   }
   move(){
-    if(this.direction === 0 ){
-      this.x -= this.xSpeed;
-      if(this.x < 0){
+    if(redLight === false){
+      if(this.direction === 0 ){
+        this.x -= this.xSpeed;
+        if(this.x < 0){
         //Moving Left 
-        this.x = width;
+          this.x = width;
+        }
       }
-    }
-    else if(this.direction === 1){
+      else if(this.direction === 1){
       //Moving Right
-      this.x += this.xSpeed;
-      if(this.x > width){
-        this.x = 0;
+        this.x += this.xSpeed;
+        if(this.x > width){
+          this.x = 0;
+        }
       }
     }
   }
@@ -163,8 +172,9 @@ class Vehicle{
     }
   }
   changeColor(){
-    this.color = color(random(255),random(255),random(255));
-    
+    if(redLight === false){
+      this.color = color(random(255),random(255),random(255));
+    }
   }
 
   action(){
@@ -185,20 +195,34 @@ class Vehicle{
   }
 }
 
-// class TrafficLight{
-//   display(){
-//     circle(50,50,100);
-//   }
-//   action(){
-//     if(keyPressed(SPACE)){
-//       this.color(255,0,0);
-//       this.display();
-//     }
-//     else{
-//       this.color(0,255,0);
-//       this.display();
-//     }
-//   }
-// }
+class TrafficLight{
+  //Displays the traffic light
+  constructor(x,y,sign){
+    this.x = x;
+    this.y = y;
+    this.sign = sign;
+  }
+  display(){
+    circle(this.x + 50,this.y + 50,100);
+  }
+  action(){
+    // Determines whether there is a red ligh
+    // Then agjusts accordingly 
+    if (redLight){
+      if(StTime < 120){
+        fill(184,29,19);
+      }
+      else{
+        fill(0,132,80);
+        StTime = 0;
+        redLight = false;
+      }
+    }
+    else{
+      fill(0,132,80);
+    }
+    this.display();
+  }
+}
 
 
