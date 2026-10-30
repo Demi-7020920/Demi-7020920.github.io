@@ -49,6 +49,7 @@ class Ball{
     
     // wall bounce
     if(this.pos.x < 0 || this.pos.x > width){
+      this.vel.x *= -0.9;
       
     }
     //floor bounce
