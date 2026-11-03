@@ -6,12 +6,12 @@ let dir;
 let pinImages = [];
 let pinIndex = 0;
 
-async function loadAssets(){
-  // lionL = loadImage("assets/lion-left.png");
-  // lionR = loadImage("assets/lion-right.png");
+// async function loadAssets(){
+//   lionL = loadImage("assets/lion-left.png");
+//   lionR = loadImage("assets/lion-right.png");
 
-  //Pinwheel Images
-}
+//   Pinwheel Images
+// }
 
 async function setup() {  
   createCanvas(windowWidth, windowHeight);
@@ -57,7 +57,7 @@ function drawLion(){
 }
 
 function drawPin(){
-  image(pinImages[pinIndex],width/2,height/5);
+  image(pinImages[pinIndex],width/2,height/2);
   if(frameCount %2 === 0){
     if(pinIndex < 8){
       pinIndex++;
@@ -66,6 +66,5 @@ function drawPin(){
       pinIndex = 0;
     } 
   }
-
 }
 
