@@ -15,6 +15,8 @@ let grid = [
 let rows = grid.length;
 let cols = grid[0].length;
 let titleSize = 60;
+let rowval = 0;
+let colval = 0;
 
 async function setup() {
   createCanvas(cols*titleSize, rows*titleSize);
@@ -24,8 +26,23 @@ function draw() {
   background(220);
   renderGrid();
   getCurrentX();
+  //win();
+  
 }
 
+function win(){
+  rowval = 0;
+  colval = 0;
+  for(let i = 0; i < rows; i++){
+    for(let x = 0 ; x < cols; x++ ){
+      colval += grid[i][x];
+    }
+    if(rowval % cols === 0){
+      console.log("Same value for col");
+    }
+    
+  }
+}
 function flip(x,y){
   //flip the tile at position (x,y);
   if(grid[y][x] === 255){
@@ -48,18 +65,21 @@ function mousePressed(){
 
     //IF THEY EXIST:
     //flip the cardinal neighbours (NSEW)
-    if(x-1 >= 0){
-      flip(x-1,y);
+    if(!keyIsDown(SHIFT)){ // cHEATER, CHEATER
+      if(x-1 >= 0){
+        flip(x-1,y);
+      }
+      if(y-1 >=0){
+        flip(x,y-1);
+      }
+      if(x < 5){
+        flip(x+1,y);
+      }
+      if(y < 5){
+        flip(x,y+1);
+      }
     }
-    if(y-1 >=0){
-      flip(x,y-1);
-    }
-    if(x < 5){
-      flip(x+1,y);
-    }
-    if(y < 5){
-      flip(x,y+1);
-    }
+    
 
   }
 }
