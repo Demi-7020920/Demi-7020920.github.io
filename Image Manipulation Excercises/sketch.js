@@ -1,27 +1,31 @@
 // Image Manipulation Excercises
 // Demi Bejide
 
-let chip, race, nuit;
+let chip, race, nuit, hand;
 
 async function loadAssets() {
   chip = await loadImage("/assets/chip.jpg");
   race = await loadImage("/assets/race.jpg");
   nuit = await loadImage("/assets/nuit.jpg");
+  hand = await loadImage("assets/hand.jpg");
 }
 
 async function setup() {
   await loadAssets();
-  createCanvas(nuit.width, nuit.height);
+  createCanvas(hand.width, hand.height);
 
   
 }
 
 function draw() {
   background(220);
-  image(nuit,0,0);
+  image(hand,0,0);
   loadPixels();
   //majCol();
   //noGreenRightSide();
+  //fiveColorPosterize();
+  //horizontalMirror();
+  //jigsaw();
   updatePixels();
 }
 
@@ -64,8 +68,8 @@ function noGreenRightSide(){
 }
 
 function fiveColorPosterize(){
-  //Looks at avg intensity and overites
-  for(let x = width/2; x < width; x++){
+  //Looks at avg intensity and overwrites
+  for(let x = 0; x < width; x++){
     for(let y = 0; y < height; y++){
       let i = (y * width + x) * 4;
       let avg = int(pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
@@ -84,11 +88,57 @@ function fiveColorPosterize(){
         pixels[i + 1] = 180;
         pixels[i + 2] = 60;
       }
-      //Continues here future Demi
+      else if(avg >= 55 && avg <= 104 ){
+        pixels[i] = 130;
+        pixels[i + 1] = 30;
+        pixels[i + 2] = 130;
+      }
+      else if(avg >= 0 && avg <= 54 ){
+        pixels[i] = 90;
+        pixels[i + 1] = 10;
+        pixels[i + 2] = 50;
+      }
     }
   }
 }
 
+function horizontalMirror(){
+  //copy all the pixels from right hand side
+  //unto their mirror locations on the left hand side
+  let values;
+  for(let x = width; x > width/2; x--){
+    for(let y = 0; y < height; y++){
+      let i = (y * width + x) * 4;
+      let rep = (y * width + (width - x) ) * 4;
+      pixels[rep] = pixels[i];
+      pixels[rep + 1] = pixels[i + 1];
+      pixels[rep + 2] = pixels[i + 2];
+    }
+  }
+}
+
+function jigsaw(){
+  // Divide image into four shapes
+  // and rotate
+  let one = [],two = [],three = [],four = [];
+  for( let x = 0; x < width/2; x++){
+    for(let y = 0; y < height/2; y++){
+      let i = (y * width + x) * 4;
+      one.push(pixels[i]);
+      
+    }
+  }
+  for(let x = width/2; x < width; x ++){
+    for(let y = 0; y < height/2; y++){
+      let i = (y * width + x) * 4;
+      let count = 0;
+      pixels[i] = one[count];
+      pixels[i + 1] = one[count + 1];
+      pixels[i + 2] = one[count + 2];
+      count++;
+    }
+  }
+}
 
 function setPixeloneD(pos,r,g,b){
   pixels[pos] = r;
