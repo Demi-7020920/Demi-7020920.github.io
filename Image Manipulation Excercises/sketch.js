@@ -24,8 +24,8 @@ function draw() {
   //majCol();
   //noGreenRightSide();
   //fiveColorPosterize();
-  //horizontalMirror();
-  //jigsaw();
+  horizontalMirror();
+  
   updatePixels();
 }
 
@@ -117,28 +117,7 @@ function horizontalMirror(){
   }
 }
 
-function jigsaw(){
-  // Divide image into four shapes
-  // and rotate
-  let one = [],two = [],three = [],four = [];
-  for( let x = 0; x < width/2; x++){
-    for(let y = 0; y < height/2; y++){
-      let i = (y * width + x) * 4;
-      one.push(pixels[i]);
-      
-    }
-  }
-  for(let x = width/2; x < width; x ++){
-    for(let y = 0; y < height/2; y++){
-      let i = (y * width + x) * 4;
-      let count = 0;
-      pixels[i] = one[count];
-      pixels[i + 1] = one[count + 1];
-      pixels[i + 2] = one[count + 2];
-      count++;
-    }
-  }
-}
+
 
 function setPixeloneD(pos,r,g,b){
   pixels[pos] = r;
