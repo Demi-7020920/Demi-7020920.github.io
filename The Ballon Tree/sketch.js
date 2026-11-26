@@ -5,18 +5,22 @@ let scale = 15;
 
 function setup() {
   createCanvas(500, 500);
-  background(255);
+  
   
 }
 
 function draw() {
+  background(255);
   drawTree(width/2, height*.9, 90, 6);
   
 }
 
 function drawLine( x1,  y1,  x2,  y2,  depth) {
   //draw a line segment connecting (x1,y1) to (x2,y2)
+  let width = map(depth,1,6,2,5);
+  strokeWeight(width);
   line(x1, y1, x2, y2);
+  strokeWeight(1);
   if( depth < 5){
     drawLeaf(x2,y2, depth);
   }
@@ -41,6 +45,12 @@ function drawTree(x1, y1, angle, depth) {
 
 function drawLeaf(x,y, depth){
   let size = map(depth,4,1,20,15);
-  fill(random(255),random(255),random(255));
+  randomSeed(255);
+  let r = random(255);
+  randomSeed(255);
+  let g = random(255);
+  randomSeed(255);
+  let b = random(255);
+  fill(r,g,b);
   circle(x,y,size);
 }
